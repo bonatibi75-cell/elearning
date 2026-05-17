@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Elektronikus tanulás - Beadandó</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            /* IDE ÍRD A KÉPED NEVÉT VAGY LINKJÉT */
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('8.jpg'); 
+            
+            /* Beállítások, hogy a kép kitöltse a képernyőt */
+            background-size: cover;       /* Kitölti a teljes területet */
+            background-position: center;  /* Középre igazítja a képet */
+            background-attachment: fixed; /* Görgetésnél is fix marad */
+            
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; /* Balra igazítás */
+        }
+
+        .tartalom-doboz {
+            margin-left: 60px;
+            max-width: 450px; /* Kicsit szélesebb a sok szöveg miatt */
+            
+            /* ÁTTETSZŐ HÁTTÉR ÉS ELHOMÁLYOSÍTÁS */
+            background: rgba(0, 0, 0, 0.4); /* Félátlátszó fekete */
+            backdrop-filter: blur(12px);    /* Az "áttűnő" üveg hatás kulcsa */
+            -webkit-backdrop-filter: blur(12px); /* Safari támogatás */
+            
+            padding: 40px;
+            border-left: 5px solid #bf4722; /* Egyetemi stílusú díszcsík */
+            border-top: 1px solid rgba(255,255,255,0.1); /* Finom élkeret */
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            
+            color: white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            border-radius: 0 15px 15px 0; /* Modern lekerekítés a jobb oldalon */
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-top: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ff7e47; /* Kiemelt tudományos szín */
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.9); /* Majdnem fehér a jó olvashatóságért */
+            text-align: justify; /* Tudományos stílusú sorkizárás */
+        }
+
+        /* ALAP GOMB STÍLUS */
+        .gomb {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 14px 35px;
+            background-color: #bf4722;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(191, 71, 34, 0.3);
+            cursor: pointer;
+        }
+
+        /* TILTOTT GOMB STÍLUSA */
+        .gomb.disabled {
+            background-color: #555 !important; /* Szürke szín */
+            color: #999 !important;
+            cursor: not-allowed;
+            pointer-events: none; /* Kikapcsolja a kattintást */
+            box-shadow: none;
+            opacity: 0.7;
+        }
+
+        .gomb:not(.disabled):hover {
+            background-color: #e6562b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 86, 43, 0.5);
+            letter-spacing: 1px;
+        }
+
+        #timer-text {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #ff7e47;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tartalom-doboz">
+        <p>A bioszféra diverzitásának változásáról alkotott kép is változatos. 
+            Egyesek a diverzitás állandó szintjéről beszélnek, mások exponenciális növekedésről. E. O. Wilson ahhoz a legnépesebb csoporthoz tartozik, mely szerint a diverzitás lassan nő. 
+            Ennek okát is keresik. Valószínűleg nagyjából állandó a fajképződés mértéke, míg az átlagos kihalási valószínűség lassan csökken. 
+            Wilson megfogalmazása szerint a diverzitásváltozás története a fajképződés (speciáció) és a kihalás (extinkció) egyensúlyának nyelvén íródik. 
+            A csökkenő átlagos kihalási valószínűség egy előre mutatónak mondható evolúciós trend eredménye is lehet, de származhat pusztán abból is, 
+            hogy a fosszilis adat egyre teljesebb (ha egy régebbi korszakból a hiányosabb fosszilis anyag miatt egy rendszertani egység képviselőit nem találjuk és emiatt a taxont kihaltnak véljük, a kihalási rátát felbecsüljük). </p>
+        
+        <!-- A gomb alapértelmezetten szürke és tiltott -->
+        <a href="dia9.html" id="next-btn" class="gomb disabled">Következő Oldal</a>
+        <span id="timer-text">A továbblépés 10 másodperc múlva lehetséges...</span>
+    </div>
+
+    <script>
+        const btn = document.getElementById('next-btn');
+        const timerText = document.getElementById('timer-text');
+        let timeLeft = 10;
+
+        const countdown = setInterval(() => {
+            timeLeft--;
+            if (timeLeft > 0) {
+                timerText.textContent = `A továbblépés ${timeLeft} másodperc múlva lehetséges...`;
+            } else {
+                clearInterval(countdown);
+                btn.classList.remove('disabled');
+                timerText.style.display = 'none';
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>

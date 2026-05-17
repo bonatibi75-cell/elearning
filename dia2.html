@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Elektronikus tanulás - Beadandó</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('2.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: flex-end; /* Lent tartja */
+            justify-content: center; /* Középen tartja */
+        }
+
+        .tartalom-doboz {
+            margin-bottom: 40px;
+            /* SZÉTHÚZÁS: Megnövelt szélesség, hogy több szöveg férjen el egy sorban */
+            width: 85%;
+            max-width: 900px; 
+            
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            
+            padding: 30px 50px; /* Több hely oldalt a dobozon belül is */
+            
+            border-bottom: 5px solid #bf4722; 
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-left: 1px solid rgba(255,255,255,0.1);
+            border-right: 1px solid rgba(255,255,255,0.1);
+            
+            color: white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            border-radius: 15px; 
+        }
+
+        p {
+            font-size: 1.05rem; /* Kicsit nagyobb betű a szélesebb sorokhoz */
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        /* GOMB ELRENDEZÉSE */
+        .gomb-sor {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* A gombot is középre teszi a dobozon belül */
+        }
+
+        .gomb {
+            display: inline-block;
+            padding: 14px 40px;
+            background-color: #bf4722;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gomb.disabled {
+            background-color: #555 !important;
+            color: #999 !important;
+            cursor: not-allowed;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .gomb:not(.disabled):hover {
+            background-color: #e6562b;
+            transform: translateY(-2px);
+        }
+
+        #timer-text {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #ff7e47;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tartalom-doboz">
+        <p>Kihalás (extinkció) alatt egy leszármazási vonal megszakadását értjük.
+           Előfordulhat, hogy egy faj geológiai időmértékkel mérve gyorsan megváltozik és másik fajjá alakul.
+           Ilyenkor az ősibb faj nyomai eltűnnek a későbbi fosszilis anyagból, de a leszármazási vonal nem szakad meg.
+           Ezt a jelenséget álkihalásnak (pszeudoextinkció) nevezzük. Nehéz elképzelni, milyen lenne ma az élővilág, ha nem történnének időnként kisebb-nagyobb kihalások.
+           A sokféleség valószínűleg gyors, kezdetben exponenciális mértékben növekedett volna.
+           Később talán telítési görbének megfelelően beállt volna egy állandó fajszám, a fajképződés megszűnésével. 
+           Az is lehet, hogy kis egyedszámú, nagyon erősen specializálódott fajok alakultak volna ki.
+           Ha nem történtek volna kihalások, az állatkertekben megcsodálhatnánk a kambriumi fura lényeket, vagy mondjuk a dodót és a dinoszauruszokat is.</p>
+        
+        <div class="gomb-sor">
+            <a href="dia3.html" id="next-btn" class="gomb disabled">Következő Oldal</a>
+            <span id="timer-text">A továbblépés 10 másodperc múlva lehetséges...</span>
+        </div>
+    </div>
+
+    <script>
+        const btn = document.getElementById('next-btn');
+        const timerText = document.getElementById('timer-text');
+        let timeLeft = 10;
+
+        const countdown = setInterval(() => {
+            timeLeft--;
+            if (timeLeft > 0) {
+                timerText.textContent = `A továbblépés ${timeLeft} másodperc múlva lehetséges...`;
+            } else {
+                clearInterval(countdown);
+                btn.classList.remove('disabled');
+                timerText.style.display = 'none';
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Elektronikus tanulás - Beadandó</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('4.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: flex-end; /* Lent tartja a dobozt */
+            justify-content: flex-start;
+        }
+
+        .tartalom-doboz {
+            margin-left: 60px;
+            /* MÓDOSÍTVA: 60px-ről 20px-re csökkentve, így még lejjebb került */
+            margin-bottom: 20px; 
+            max-width: 480px; 
+            background: rgba(0, 0, 0, 0.5); 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 40px;
+            border-left: 5px solid #bf4722;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            border-radius: 0 15px 15px 0;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ff7e47;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.95);
+            text-align: justify;
+        }
+
+        /* GOMB STÍLUSOK */
+        .gomb {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background-color: #bf4722;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(191, 71, 34, 0.3);
+            cursor: pointer;
+        }
+
+        .gomb.disabled {
+            background-color: #444 !important;
+            color: #888 !important;
+            cursor: not-allowed;
+            pointer-events: none;
+            box-shadow: none;
+            opacity: 0.6;
+        }
+
+        .gomb:not(.disabled):hover {
+            background-color: #e6562b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 86, 43, 0.5);
+        }
+
+        #timer-text {
+            display: block;
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: #ff7e47;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tartalom-doboz">
+        <p>A modern kihaláskutatás századunk ötvenes-hatvanas éveiben lendült fel, majd 1980-ban Alvarez és társainak szenzációszámba menő cikke adott nagy lökést a tudományterületnek. 
+           Ebben a cikkben vetődött fel először a dinoszauruszok kipusztulásának magyarázataként a Földre becsapódó óriási meteor lehetősége.<br><br>
+           Ma a fajok kihalását főleg paleontológusok és biológusok kutatják. A paleontológusok az ősmaradványok elemzését tartják a legbiztosabb módszernek. 
+           A biológusok ezzel szemben egyrészt a mai élővilág megfigyeléséből vonnak le a múltra vonatkozó következtetéseket, másrészt pedig matematikusokkal és fizikusokkal együttműködve igyekeznek modellezni a múltbeli eseményeket.<br><br>
+           Az igazán komoly eredményeknek természetesen meg kell felelniük mindegyik megközelítés elvárásainak.</p>
+        
+        <a href="dia5.html" id="next-btn" class="gomb disabled">KÖVETKEZŐ OLDAL</a>
+        <span id="timer-text">A továbblépés 10 másodperc múlva lehetséges...</span>
+    </div>
+
+    <script>
+        const btn = document.getElementById('next-btn');
+        const timerText = document.getElementById('timer-text');
+        let timeLeft = 10;
+
+        const countdown = setInterval(() => {
+            timeLeft--;
+            if (timeLeft > 0) {
+                timerText.textContent = `A továbblépés ${timeLeft} másodperc múlva lehetséges...`;
+            } else {
+                clearInterval(countdown);
+                btn.classList.remove('disabled');
+                timerText.style.display = 'none';
+            }
+        }, 1000);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Elektronikus tanulás - Beadandó</title>
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background-image:
+                linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+                url('forrasok.jpg');
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .tartalom-doboz {
+            margin-left: 60px;
+            max-width: 450px;
+
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            padding: 40px;
+
+            border-left: 5px solid #bf4722;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+
+            color: white;
+
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            border-radius: 0 15px 15px 0;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-top: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ff7e47;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.9);
+            text-align: justify;
+        }
+
+        .gomb {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 14px 35px;
+
+            background-color: #bf4722;
+            color: white;
+
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+
+            border-radius: 5px;
+
+            transition: all 0.3s ease;
+
+            box-shadow: 0 4px 15px rgba(191, 71, 34, 0.3);
+
+            cursor: pointer;
+        }
+
+        .gomb.disabled {
+            background-color: #555 !important;
+            color: #999 !important;
+            cursor: not-allowed;
+            pointer-events: none;
+            box-shadow: none;
+            opacity: 0.7;
+        }
+
+        .gomb:not(.disabled):hover {
+            background-color: #e6562b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(230, 86, 43, 0.5);
+            letter-spacing: 1px;
+        }
+
+        #timer-text {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #ff7e47;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="tartalom-doboz">
+
+        <h1>Források</h1>
+
+        <p>
+            https://www.termvil.hu/archiv/tv98/tv9803/kihal.html
+            Alvarez et al. 1980 Extraterrestrial cause for the
+            Cretaceous-Tertiary extinction: experimental results and
+            theoretical interpretation. Science. 208:1095–1108.
+
+            Benton, M. J. 1995 Diversification and extinction in the
+            history of life. Science. 268:52–58.
+
+            Hallam, A. & Wingall, P. B. 1997 Mass Extinctions and
+            their Aftermath. Oxford University Press. Oxford.
+
+            Jablonski, D. 1986 Background and mass extinctions:
+            the alterations of macroevolutionary regimes.
+            Science. 231:129–133.
+
+            Raup, D. M. 1986 Biological extinction in Earth history.
+            Science. 231:1528–1533.
+
+            Raup, D. M. & Sepkoski, J. J. 1984 Periodicity of extinctions
+            in the geologic past. PNAS. 81:801–805.
+
+            Wilson, E. O. 1992 The Diversity of Life.
+            Penguin Books. London.
+
+            129. évf. 3. sz. 1998. március, 105–108. o.
+
+            https://www.kfki.hu/chemonet/TermVil/
+            https://www.ch.bme.hu/chemonet/TermVil/
+        </p>
+
+        <a href="index.html" id="next-btn" class="gomb disabled">
+            Vége
+        </a>
+
+        <span id="timer-text">
+            A továbblépés 10 másodperc múlva lehetséges...
+        </span>
+
+    </div>
+
+    <script>
+
+        const btn = document.getElementById('next-btn');
+        const timerText = document.getElementById('timer-text');
+
+        let timeLeft = 10;
+
+        const countdown = setInterval(() => {
+
+            timeLeft--;
+
+            if (timeLeft > 0) {
+
+                timerText.textContent =
+                    `A továbblépés ${timeLeft} másodperc múlva lehetséges...`;
+
+            } else {
+
+                clearInterval(countdown);
+
+                btn.classList.remove('disabled');
+
+                timerText.style.display = 'none';
+            }
+
+        }, 1000);
+
+    </script>
+
+</body>
+</html>
